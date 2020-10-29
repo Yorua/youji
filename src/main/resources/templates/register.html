@@ -25,7 +25,7 @@
 				<div class="col-lg-6 bg-white">
 					<div class="form d-flex align-items-center">
 						<div class="content">
-							<form method="post" action="/userReg" class="form-validate" id="loginFrom">
+
 							<div class="logo">
 								<h1>注册</h1><p/>
 							</div>
@@ -47,18 +47,6 @@
 									两次密码必须相同 且在6~10位之间
 								</div>
 							</div>
-							<div class="form-group">
-								<input id="register-realName" class="input-material" type="text" name="realName" placeholder="请输入用户名/姓名" >
-								<div class="invalid-feedback">
-									用户名必须在2~10位之间
-								</div>
-							</div>
-							<div class="form-group">
-								<input id="register-sex" class="input-material" type="text" name="sex" placeholder="请输入用户名/姓名" >
-								<div class="invalid-feedback">
-									用户名必须在2~10位之间
-								</div>
-							</div>
 
 							<div class="form-group">
 								<button id="regbtn" type="submit" name="registerSubmit" class="btn btn-primary">注册</button>
@@ -66,7 +54,7 @@
 									<small>已有账号?</small><a href="login" class="signup">&nbsp;登录</a>
 								</div>
 							</div>
-							</form>
+
 						</div>
 					</div>
 				</div>
@@ -79,16 +67,14 @@
 <script src="bootstrap/js/bootstrap.min.js"></script>
 <script>
 	$(function(){
-		/*错误class  form-control is-invalid
-        正确class  form-control is-valid*/
 		var flagName=false;
 		var flagPas=false;
 		var flagPass=false;
-		/*验证用户名*/
-		var name,passWord,passWords;
+		var userName,password,passwords;
+
 		$("#register-username").change(function(){
-			name=$("#register-username").val();
-			if(name.length<2||name.length>10){
+			userName=$("#register-username").val();
+			if(userName.length<2||userName.length>10){
 				$("#register-username").removeClass("form-control is-valid")
 				$("#register-username").addClass("form-control is-invalid");
 				flagName=false;
@@ -100,8 +86,8 @@
 		})
 		/*验证密码*/
 		$("#register-password").change(function(){
-			passWord=$("#register-password").val();
-			if(passWord.length<6||passWord.length>18){
+			password=$("#register-password").val();
+			if(password.length<6||password.length>18){
 				$("#register-password").removeClass("form-control is-valid")
 				$("#register-password").addClass("form-control is-invalid");
 				flagPas=false;
@@ -113,8 +99,8 @@
 		})
 		/*验证确认密码*/
 		$("#register-passwords").change(function(){
-			passWords=$("#register-passwords").val();
-			if((passWord!=passWords)||(passWords.length<6||passWords.length>18)){
+			passwords=$("#register-passwords").val();
+			if((password!=passwords)||(passwords.length<6||passwords.length>18)){
 				$("#register-passwords").removeClass("form-control is-valid")
 				$("#register-passwords").addClass("form-control is-invalid");
 				flagPass=false;
@@ -125,10 +111,27 @@
 			}
 		})
 
-
 		$("#regbtn").click(function(){
 			if(flagName&&flagPas&&flagPass){
-				alert("123")
+				$.ajax({
+					url: "/userReg",
+					type: "post",
+					data: {
+						userName: userName,
+						password: password
+					},
+					success: function (data) {
+						if (data == "true") {
+							alert("注册成功！")
+							window.location.href="/login";
+						} else if (data == "reName") {
+							alert("该用户名已注册！")
+						}
+					},
+					error: function (jqXHR, textStatus, errorThrown) {
+						alert("注册失败！")
+					}
+				})
 			}else{
 				if(!flagName){
 					$("#register-username").addClass("form-control is-invalid");

@@ -1894,6 +1894,11 @@ input.input-material.is-invalid ~ label {
 .login-page {
   position: relative;
 }
+.youji-page{
+
+  background:url(../img/true.jpg) no-repeat left ;
+  background-size:contain;
+}
 
 .login-page::before {
   content: '';
@@ -1901,7 +1906,7 @@ input.input-material.is-invalid ~ label {
   height: 100%;
   display: block;
   z-index: -1;
-  background: url(../img/p_big3.jpg);
+  background: url(../img/p_big1.jpg);
   background-size: cover;
   -webkit-filter: blur(10px);
   filter: blur(10px);

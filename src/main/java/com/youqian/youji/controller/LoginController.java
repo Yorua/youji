@@ -1,11 +1,11 @@
 package com.youqian.youji.controller;
 
 import com.youqian.youji.entity.Users;
-import com.youqian.youji.mapper.LoginMapper;
+import com.youqian.youji.service.LoginService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
@@ -14,7 +14,7 @@ import javax.servlet.http.HttpSession;
 public class LoginController {
 
     @Resource
-    private LoginMapper loginMapper;
+    LoginService loginService;
 
     @RequestMapping("login")
     public String login() {
@@ -29,7 +29,7 @@ public class LoginController {
     @RequestMapping("userLogin")
     public String userLogin(Users users, HttpSession session) {
         System.out.println(users.toString());
-        Users userInfo=loginMapper.userLogin(users);
+        Users userInfo=loginService.userLogin(users);
         System.out.println(userInfo);
         if (userInfo!=null) {
             session.setAttribute("info", userInfo);
@@ -41,15 +41,15 @@ public class LoginController {
     }
 
     @RequestMapping("userReg")
-    public String userReg(Users users, HttpSession session) {
+    public @ResponseBody String userReg(Users users, HttpSession session) {
         System.out.println(users.toString());
-        boolean userInfo=loginMapper.userReg(users);
+        boolean userInfo=loginService.userReg(users);
         if (userInfo) {
             session.setAttribute("regInfo", users.getUserName());
-            return "login";
+            return "true";
         } else {
             session.setAttribute("regInfo", "1");
-            return "register";
+            return "false";
         }
     }
 }

@@ -3,10 +3,12 @@ package com.youqian.youji.service.Impl;
 import com.youqian.youji.entity.Users;
 import com.youqian.youji.mapper.LoginMapper;
 import com.youqian.youji.service.LoginService;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import javax.annotation.Resource;
 
+@Service("loginService")
 public class LoginServiceImpl implements LoginService {
-    @Autowired
+    @Resource
     LoginMapper loginMapper;
 
     @Override
