@@ -2,7 +2,7 @@ package com.youqian.youji.entity;
 
 public class Users {
     private int userId;
-    private String userName;
+    private String username;
     private String password;
     private String realName;
     private String sex;
@@ -18,12 +18,12 @@ public class Users {
         this.userId = userId;
     }
 
-    public String getUserName() {
-        return userName;
+    public String getUsername() {
+        return username;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getRealName() {
@@ -78,7 +78,7 @@ public class Users {
     public String toString() {
         return "Users{" +
                 "userId=" + userId +
-                ", userName='" + userName + '\'' +
+                ", userName='" + username + '\'' +
                 ", realName='" + realName + '\'' +
                 ", password='" + password + '\'' +
                 ", sex='" + sex + '\'' +
