@@ -4,6 +4,7 @@ import at.pollux.thymeleaf.shiro.dialect.ShiroDialect;
 import com.youqian.youji.realm.UserRealm;
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
 import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import java.util.LinkedHashMap;
@@ -13,7 +14,7 @@ import java.util.Map;
 public class ShiroConfig {
 
     @Bean
-    public ShiroFilterFactoryBean getShiroFilterFactoryBean(DefaultWebSecurityManager securityManager){
+    public ShiroFilterFactoryBean getShiroFilterFactoryBean(@Qualifier("securityManager") DefaultWebSecurityManager securityManager){
         ShiroFilterFactoryBean shiroFilterFactoryBean = new ShiroFilterFactoryBean();
         //设置安全管理器
         shiroFilterFactoryBean.setSecurityManager(securityManager);
@@ -28,35 +29,33 @@ public class ShiroConfig {
          *       role: 该资源必须得到角色权限才可以访问
          */
         Map<String,String> filterMap = new LinkedHashMap<String,String>();
+//        filterMap.put("/travelElf/api/user/toLogin", "anon");
+//        filterMap.put("/travelElf/api/user/toRegister", "anon");
 
-        //放行登录注册页面
-        filterMap.put("/userLogin", "anon");
-        filterMap.put("/userReg", "anon");
-
-        filterMap.put("/*", "authc");
-        //拦截页面成功跳转登录页面
-        shiroFilterFactoryBean.setLoginUrl("/login");
+        filterMap.put("/resources/**", "anon");
+        filterMap.put("/travelElf/api/user/login", "anon");
+        filterMap.put("/**", "authc");
+        shiroFilterFactoryBean.setFilterChainDefinitionMap(filterMap);
+        shiroFilterFactoryBean.setLoginUrl("/travelElf/api/user/toLogin");
 
         //授权过滤器
         //注意：当前授权拦截后，shiro会自动跳转到未授权页面
         //filterMap.put("/url", "perms[user:url]");
-
         //设置未授权提示页面
         //shiroFilterFactoryBean.setUnauthorizedUrl("/url");
 
-        shiroFilterFactoryBean.setFilterChainDefinitionMap(filterMap);
         return shiroFilterFactoryBean;
     }
 
-    @Bean
-    public DefaultWebSecurityManager getDefaultWebSecurityManager(UserRealm userRealm){
+    @Bean(name="securityManager")
+    public DefaultWebSecurityManager getDefaultWebSecurityManager(@Qualifier("userRealm") UserRealm userRealm){
         DefaultWebSecurityManager securityManager=new DefaultWebSecurityManager();
         securityManager.setRealm(userRealm);
         return securityManager;
     }
 
-    @Bean
-    public UserRealm getRealm(){
+    @Bean(name="userRealm")
+    public UserRealm userRealm(){
         return  new UserRealm();
     }
 
@@ -64,7 +63,7 @@ public class ShiroConfig {
      * 配置ShiroDialect，用于thymeleaf和shiro标签配合使用
      */
     @Bean
-    public ShiroDialect getShiroDialect(){
+    public ShiroDialect shiroDialect(){
         return new ShiroDialect();
     }
 

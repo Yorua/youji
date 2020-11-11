@@ -1,21 +1,17 @@
 package com.youqian.youji.realm;
 
-import com.youqian.youji.entity.Users;
-import com.youqian.youji.service.LoginService;
-import org.apache.shiro.SecurityUtils;
+import com.youqian.youji.entity.User;
+import com.youqian.youji.service.UserService;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.authz.AuthorizationInfo;
-import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
-import org.apache.shiro.subject.Subject;
-import org.apache.shiro.util.ByteSource;
 import org.springframework.beans.factory.annotation.Autowired;
 
 public class UserRealm  extends AuthorizingRealm {
 
     @Autowired
-    private LoginService loginSerivce;
+    private UserService loginSerivce;
 
     /**
      * 执行授权逻辑
@@ -43,13 +39,10 @@ public class UserRealm  extends AuthorizingRealm {
     @Override
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken arg0) throws AuthenticationException {
         System.out.println("认证...");
-        //编写shiro判断逻辑，判断用户名和密码
-        //1.判断用户名
         UsernamePasswordToken token = (UsernamePasswordToken)arg0;
-        Users user = loginSerivce.findUserByName(token.getUsername());
+        User user = loginSerivce.findUserByName(token.getUsername());
         if(user==null)
-            return null;    //shiro底层会抛出UnKnowAccountException
-        //2.判断密码
+            return null;
         return new SimpleAuthenticationInfo(user,user.getPassword(),"");
     }
 }

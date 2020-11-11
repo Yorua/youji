@@ -1,6 +1,6 @@
 package com.youqian.youji.entity;
 
-public class Users {
+public class User {
     private int userId;
     private String username;
     private String password;

@@ -2,8 +2,8 @@
 <html>
 <head>
 	<title>Bootstrap Material Admin</title>
-	<link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
-	<link rel="stylesheet" href="css/style.css" id="theme-stylesheet">
+	<link rel="stylesheet" href="/static/resources/bootstrap/css/bootstrap.min.css">
+	<link rel="stylesheet" href="/static/resources/css/style.css" id="theme-stylesheet">
 </head>
 <body>
 <div class="page login-page">
@@ -25,7 +25,6 @@
 				<div class="col-lg-6 bg-white">
 					<div class="form d-flex align-items-center">
 						<div class="content">
-
 							<div class="logo">
 								<h1>注册</h1><p/>
 							</div>
@@ -47,11 +46,16 @@
 									两次密码必须相同 且在6~10位之间
 								</div>
 							</div>
-
+							<div class="form-group">
+								<input id="register-email" class="input-material" type="email" name="email" placeholder="请输入邮箱"   >
+								<div class="invalid-feedback">
+									邮箱格式错误
+								</div>
+							</div>
 							<div class="form-group">
 								<button id="regbtn" type="submit" name="registerSubmit" class="btn btn-primary">注册</button>
 								<div style="margin-top: -15px;margin-left: 50%">
-									<small>已有账号?</small><a href="login" class="signup">&nbsp;登录</a>
+									<small>已有账号?</small><a href="/travelElf/api/user/toLogin" class="signup">&nbsp;登录</a>
 								</div>
 							</div>
 
@@ -63,9 +67,9 @@
 	</div>
 </div>
 
-<script src="js/jquery-3.5.1.js"></script>
-<script src="bootstrap/js/bootstrap.min.js"></script>
-<script>
+<script src="/static/resources/js/jquery-3.5.1.js"></script>
+<script src="/static/resources/bootstrap/js/bootstrap.min.js"></script>
+<script >
 	$(function(){
 		var flagName=false;
 		var flagPas=false;

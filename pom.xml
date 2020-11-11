@@ -17,6 +17,9 @@
     <properties>
         <java.version>1.8</java.version>
         <spring.shiro.version>1.6.0</spring.shiro.version>
+        <thymeleaf-shiro.version>2.0.0</thymeleaf-shiro.version>
+        <mybatis.version>2.1.1</mybatis.version>
+        <alibaba.version>1.1.21</alibaba.version>
     </properties>
 
     <dependencies>
@@ -60,7 +63,7 @@
         <dependency>
             <groupId>com.github.theborakompanioni</groupId>
             <artifactId>thymeleaf-extras-shiro</artifactId>
-            <version>2.0.0</version>
+            <version>${thymeleaf-shiro.version}</version>
         </dependency>
 
         <dependency>
@@ -72,13 +75,13 @@
         <dependency>
             <groupId>org.mybatis.spring.boot</groupId>
             <artifactId>mybatis-spring-boot-starter</artifactId>
-            <version>2.1.1</version>
+            <version>${mybatis.version}</version>
         </dependency>
 
         <dependency>
             <groupId>com.alibaba</groupId>
             <artifactId>druid-spring-boot-starter</artifactId>
-            <version>1.1.21</version>
+            <version>${alibaba.version}</version>
         </dependency>
 
         <dependency>
