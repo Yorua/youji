@@ -1,4 +1,4 @@
-package com.youqian.youji;
+package com.travelElf.youji;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

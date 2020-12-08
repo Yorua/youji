@@ -1,7 +1,7 @@
-package com.youqian.youji.config;
+package com.travelElf.youji.config;
 
 import at.pollux.thymeleaf.shiro.dialect.ShiroDialect;
-import com.youqian.youji.realm.UserRealm;
+import com.travelElf.youji.realm.UserRealm;
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
 import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -29,15 +29,16 @@ public class ShiroConfig {
          *       role: 该资源必须得到角色权限才可以访问
          */
         Map<String,String> filterMap = new LinkedHashMap<String,String>();
-//        filterMap.put("/travelElf/api/user/toLogin", "anon");
-//        filterMap.put("/travelElf/api/user/toRegister", "anon");
-
         filterMap.put("/resources/**", "anon");
+        filterMap.put("/travelElf/api/user/toLogin", "anon");
         filterMap.put("/travelElf/api/user/login", "anon");
+        filterMap.put("/travelElf/api/user/register", "anon");
+        filterMap.put("/travelElf/api/user/toRegister", "anon");
         filterMap.put("/**", "authc");
-        shiroFilterFactoryBean.setFilterChainDefinitionMap(filterMap);
-        shiroFilterFactoryBean.setLoginUrl("/travelElf/api/user/toLogin");
 
+        shiroFilterFactoryBean.setLoginUrl("/travelElf/api/user/toLogin");
+        shiroFilterFactoryBean.setSuccessUrl("/travelElf/api/index");
+        shiroFilterFactoryBean.setFilterChainDefinitionMap(filterMap);
         //授权过滤器
         //注意：当前授权拦截后，shiro会自动跳转到未授权页面
         //filterMap.put("/url", "perms[user:url]");

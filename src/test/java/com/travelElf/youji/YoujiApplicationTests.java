@@ -1,9 +1,6 @@
-package com.youqian.youji;
+package com.travelElf.youji;
 
-import com.youqian.youji.entity.User;
-import com.youqian.youji.mapper.UserMapper;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest

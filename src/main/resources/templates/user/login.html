@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>游迹-登录</title>
+	<link rel="stylesheet" href="/resources/bootstrap/css/bootstrap.min.css">
+	<link rel="stylesheet" href="/resources/css/style.css" id="theme-stylesheet">
+</head>
+<body>
+<div class="page login-page">
+	<div class="container d-flex align-items-center">
+		<div class="form-holder has-shadow">
+			<div class="row">
+				<div class="col-lg-6">
+					<div class="info d-flex align-items-center">
+						<div class="content">
+							<div class="logo">
+								<h1>游迹</h1>
+							</div>
+							<p>用心记录你的旅游痕迹</p>
+						</div>
+					</div>
+				</div>
+				<div class="col-lg-6 bg-white">
+					<div class="form d-flex align-items-center">
+						<div class="content">
+							<div class="logo">
+								<h1>登录</h1><p/>
+							</div>
+								<div class="form-group">
+									<input id="login-username" type="text" name="userName" required data-msg="请输入用户名" placeholder="用户名"  class="input-material">
+									<div class="invalid-feedback">
+										用户名不能为空
+									</div>
+								</div>
+								<div class="form-group">
+									<input id="login-password" type="password" name="passWord" required data-msg="请输入密码" placeholder="密码" class="input-material">
+									<div class="invalid-feedback">
+										密码不能为空
+									</div>
+								</div>
+								<button id="login" type="submit" class="btn btn-primary">登录</button>
+								<div style="margin-top: -40px;">
+									<div class="custom-control custom-checkbox " style="float: right;">
+										<input type="checkbox" class="custom-control-input" id="check2" >
+										<label class="custom-control-label" for="check2">自动登录</label>
+									</div>
+									<div class="custom-control custom-checkbox " style="float: right;">
+										<input type="checkbox" class="custom-control-input" id="check1" >
+										<label class="custom-control-label" for="check1">记住密码&nbsp;&nbsp;</label>
+									</div>
+								</div>
+							<br/><br/>
+							<small>没有账号?</small><a href="/travelElf/api/user/toRegister" class="signup">&nbsp;注册</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<script src="/resources/js/jquery-3.5.1.js"></script>
+<script src="/resources/bootstrap/js/bootstrap.min.js"></script>
+<script type="text/javascript">
+	$(function(){
+		var flagName=false;
+		var flagPas=false;
+		var userName,passWord;
+
+		$("#login-username").change(function(){
+			userName=$("#login-username").val();
+			if(userName.length == 0){
+				$("#login-username").removeClass("form-control is-valid")
+				$("#login-username").addClass("form-control is-invalid");
+				flagName=false;
+			}else{
+				$("#login-username").removeClass("form-control is-invalid")
+				$("#login-username").addClass("form-control is-valid");
+				flagName=true;
+			}
+		})
+
+		$("#login-password").change(function(){
+			passWord=$("#login-password").val();
+			if(passWord.length == 0){
+				$("#login-password").removeClass("form-control is-valid")
+				$("#login-password").addClass("form-control is-invalid");
+				flagPas=false;
+			}else{
+				$("#login-password").removeClass("form-control is-invalid")
+				$("#login-password").addClass("form-control is-valid");
+				flagPas=true;
+			}
+		})
+
+		$("#login").click(function(){
+			if(flagName&&flagPas){
+				$.ajax({
+					url: "/travelElf/api/user/login",
+					type: "post",
+					data: {
+						userName: userName,
+						passWord: passWord,
+					},
+					success: function (data) {
+						if (data.errorCode == "0") {
+							window.location.href="/travelElf/api/index";
+						} else{
+							alert(data.message);
+						}
+					},
+					error: function (jqXHR, textStatus, errorThrown) {
+						alert("注册失败,系统错误！")
+					}
+				})
+			}else{
+				if(!flagName){
+					$("#login-username").addClass("form-control is-invalid");
+				}
+				if(!flagPas){
+					$("#login-password").addClass("form-control is-invalid");
+				}
+			}
+		})
+	})
+</script>
+</body>
+</html>

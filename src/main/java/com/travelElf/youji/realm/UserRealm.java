@@ -1,7 +1,7 @@
-package com.youqian.youji.realm;
+package com.travelElf.youji.realm;
 
-import com.youqian.youji.entity.User;
-import com.youqian.youji.service.UserService;
+import com.travelElf.youji.entity.User;
+import com.travelElf.youji.mapper.UserMapper;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
@@ -11,7 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 public class UserRealm  extends AuthorizingRealm {
 
     @Autowired
-    private UserService loginSerivce;
+    private UserMapper userMapper;
 
     /**
      * 执行授权逻辑
@@ -27,7 +27,7 @@ public class UserRealm  extends AuthorizingRealm {
         //获取当前登录用户
         //Subject subject = SecurityUtils.getSubject();
         //Users user = (Users)subject.getPrincipal();
-        //Users dbUser = loginSerivce.findUserById(user.getUserId());
+        //Users dbUser = userMapper.findUserById(user.getUserId());
         //info.addStringPermission(dbUser.getPerms());
         //return info;
         return  null;
@@ -40,9 +40,9 @@ public class UserRealm  extends AuthorizingRealm {
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken arg0) throws AuthenticationException {
         System.out.println("认证...");
         UsernamePasswordToken token = (UsernamePasswordToken)arg0;
-        User user = loginSerivce.findUserByName(token.getUsername());
+        User user = userMapper.findUserByName(token.getUsername());
         if(user==null)
             return null;
-        return new SimpleAuthenticationInfo(user,user.getPassword(),"");
+        return new SimpleAuthenticationInfo(user,user.getPassWord(),"");
     }
 }
