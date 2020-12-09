@@ -30,14 +30,13 @@ public class ShiroConfig {
          */
         Map<String,String> filterMap = new LinkedHashMap<String,String>();
         filterMap.put("/resources/**", "anon");
-        filterMap.put("/travelElf/api/user/toLogin", "anon");
+        filterMap.put("/travelElf/api/toPage/user/login", "anon");
         filterMap.put("/travelElf/api/user/login", "anon");
         filterMap.put("/travelElf/api/user/register", "anon");
-        filterMap.put("/travelElf/api/user/toRegister", "anon");
+        filterMap.put("/travelElf/api/toPage/user/register", "anon");
         filterMap.put("/**", "authc");
 
-        shiroFilterFactoryBean.setLoginUrl("/travelElf/api/user/toLogin");
-        shiroFilterFactoryBean.setSuccessUrl("/travelElf/api/index");
+        shiroFilterFactoryBean.setLoginUrl("/travelElf/api/toPage/user/login");
         shiroFilterFactoryBean.setFilterChainDefinitionMap(filterMap);
         //授权过滤器
         //注意：当前授权拦截后，shiro会自动跳转到未授权页面

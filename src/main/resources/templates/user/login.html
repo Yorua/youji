@@ -50,7 +50,7 @@
 									</div>
 								</div>
 							<br/><br/>
-							<small>没有账号?</small><a href="/travelElf/api/user/toRegister" class="signup">&nbsp;注册</a>
+							<small>没有账号?</small><a href="/travelElf/api/toPage/user/register" class="signup">&nbsp;注册</a>
 						</div>
 					</div>
 				</div>
@@ -103,7 +103,7 @@
 					},
 					success: function (data) {
 						if (data.errorCode == "0") {
-							window.location.href="/travelElf/api/index";
+							window.location.href="/travelElf/api/toPage/index";
 						} else{
 							alert(data.message);
 						}

@@ -3,9 +3,11 @@ package com.travelElf.youji.service.Impl;
 import com.travelElf.youji.common.result.ResultEntity;
 import com.travelElf.youji.constant.MessageConstant;
 import com.travelElf.youji.dto.UserLoginResultDto;
+import com.travelElf.youji.entity.User;
 import com.travelElf.youji.mapper.UserMapper;
 import com.travelElf.youji.req.UserLoginReq;
 import com.travelElf.youji.req.UserRegisterReq;
+import com.travelElf.youji.req.UserUpdatePswReq;
 import com.travelElf.youji.service.IUserService;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.IncorrectCredentialsException;
@@ -56,4 +58,6 @@ public class UserServiceImpl implements IUserService {
             return ResultEntity.createFailResult(MessageConstant.REGIST_FAIL);
         }
     }
+
+
 }

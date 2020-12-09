@@ -55,7 +55,7 @@
 							<div class="form-group">
 								<button id="regBtn" type="submit" name="registerSubmit" class="btn btn-primary">注册</button>
 								<div style="margin-top: -15px;margin-left: 50%">
-									<small>已有账号?</small><a href="/travelElf/api/user/toLogin" class="signup">&nbsp;登录</a>
+									<small>已有账号?</small><a href="/travelElf/api/toPage/user/login" class="signup">&nbsp;登录</a>
 								</div>
 							</div>
 
@@ -75,6 +75,7 @@
 		var flagPas=false;
 		var flagPass=false;
 		var flagEmail=false;
+		var reg=/^[a-zA-Z0-9_.-]+@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*\.[a-zA-Z0-9]{2,6}$/;
 		var userName,passWord,passWords,email;
 
 		$("#register-username").change(function(){
@@ -105,7 +106,7 @@
 
 		$("#register-passwords").change(function(){
 			passWords=$("#register-passwords").val();
-			if((passWord!=passWords)||(passWords.length<6||passWords.length>18)){
+			if((passWord!=passWords)&&(passWords.length<6||passWords.length>18)){
 				$("#register-passwords").removeClass("form-control is-valid")
 				$("#register-passwords").addClass("form-control is-invalid");
 				flagPass=false;
@@ -118,7 +119,7 @@
 
 		$("#register-email").change(function(){
 			email=$("#register-email").val();
-			if(email.length<2||email.length>10){
+			if(!reg.test(email)){
 				$("#register-email").removeClass("form-control is-valid")
 				$("#register-email").addClass("form-control is-invalid");
 				flagEmail=false;

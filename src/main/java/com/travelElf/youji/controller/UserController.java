@@ -3,6 +3,7 @@ package com.travelElf.youji.controller;
 import com.travelElf.youji.common.result.ResultEntity;
 import com.travelElf.youji.req.UserLoginReq;
 import com.travelElf.youji.req.UserRegisterReq;
+import com.travelElf.youji.req.UserUpdatePswReq;
 import com.travelElf.youji.service.IUserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
